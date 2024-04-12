@@ -28,7 +28,7 @@ type V2GoTagExpr struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @go_tags(`validate:"required"`)
-	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 用户id
+	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty" validate:"required"` // 用户id
 }
 
 func (x *V2GoTagExpr) Reset() {
@@ -75,7 +75,7 @@ type IP struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Address string `protobuf:"bytes,1,opt,name=Address,proto3" json:"Address,omitempty"` // @gotags: valid:"ip" yaml:"ip" json:"overrided"
+	Address string `protobuf:"bytes,1,opt,name=Address,proto3" json:"overrided" valid:"ip" yaml:"ip"` // @gotags: valid:"ip" yaml:"ip" json:"overrided"
 }
 
 func (x *IP) Reset() {
@@ -128,11 +128,11 @@ type URL struct {
 	// `valid:"-"`.
 	//
 	// @gotags: valid:"-"
-	Scheme string `protobuf:"bytes,1,opt,name=scheme,proto3" json:"scheme,omitempty"` // @gotags: valid:"http|https"
+	Scheme string `protobuf:"bytes,1,opt,name=scheme,proto3" json:"scheme,omitempty" valid:"-"` // @gotags: valid:"http|https"
 	Url    string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
 	// Test legacy field name.
 	// @inject_tags: valid:"nonzero"
-	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty" valid:"nonzero"`
 }
 
 func (x *URL) Reset() {
@@ -194,7 +194,7 @@ type Params struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @gotags: validate:"omitempty"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" validate:"omitempty"`
 	// gets converted into XXX_Deprecated, for use with testing pre-v1.4.x protoc-gen-go
 	// functionality that exposes unknown fields as public.
 	XXX_Deprecated string `protobuf:"bytes,2,opt,name=XXX__deprecated,json=XXXDeprecated,proto3" json:"XXX__deprecated,omitempty"`
@@ -252,7 +252,7 @@ type Record struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @gotags: validate:"omitempty"
-	Id        string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id        string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" validate:"omitempty"`
 	TestAny   *anypb.Any     `protobuf:"bytes,2,opt,name=test_any,json=testAny,proto3" json:"test_any,omitempty"`
 	TestEmpty *emptypb.Empty `protobuf:"bytes,3,opt,name=test_empty,json=testEmpty,proto3" json:"test_empty,omitempty"`
 }
@@ -321,7 +321,7 @@ type OneOfObject struct {
 	//
 	//	*OneOfObject_Foo
 	//	*OneOfObject_Bar
-	FooBar isOneOfObject_FooBar `protobuf_oneof:"foo_bar"`
+	FooBar isOneOfObject_FooBar `protobuf_oneof:"foo_bar" tag:"foo_bar"`
 }
 
 func (x *OneOfObject) Reset() {
@@ -383,12 +383,12 @@ type isOneOfObject_FooBar interface {
 
 type OneOfObject_Foo struct {
 	// @gotags: tag:"foo"
-	Foo string `protobuf:"bytes,1,opt,name=foo,proto3,oneof"`
+	Foo string `protobuf:"bytes,1,opt,name=foo,proto3,oneof" tag:"foo"`
 }
 
 type OneOfObject_Bar struct {
 	// @gotags: tag:"bar"
-	Bar int64 `protobuf:"varint,2,opt,name=bar,proto3,oneof"`
+	Bar int64 `protobuf:"varint,2,opt,name=bar,proto3,oneof" tag:"bar"`
 }
 
 func (*OneOfObject_Foo) isOneOfObject_FooBar() {}

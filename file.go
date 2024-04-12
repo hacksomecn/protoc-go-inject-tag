@@ -28,7 +28,7 @@ var (
 	// }
 	//
 
-	rCommentGoTagFunc = regexp.MustCompile(`(\s?)@go_tags\(` + "(`.*`)" + `\)\s`)
+	rCommentGoTagFunc = regexp.MustCompile(`(\s?)@go_tags\(` + "(`.*`)" + `\)`)
 )
 
 type textArea struct {

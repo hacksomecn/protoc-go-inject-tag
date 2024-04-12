@@ -14,13 +14,14 @@ func tagFromComment(comment string) (tag string) {
 	}
 
 	// @go_tags(`bson:"value"`)
-	matched := rComment.FindStringSubmatch(comment)
+	matched := rCommentGoTagFunc.FindStringSubmatch(comment)
 	if len(matched) != 3 {
 		return
 	}
 
 	strTags := matched[2]
 	strTags = strings.Trim(strTags, "`")
+	tag = strTags
 	return
 }
 

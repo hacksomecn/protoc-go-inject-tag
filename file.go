@@ -18,6 +18,18 @@ var (
 	rAll     = regexp.MustCompile(".*")
 )
 
+var (
+	// support: Go tags regexp: `(\s?)@go_tags\(` + "(`.*`)" + `\)\s`
+	// message Example {
+	// ...
+	// string name = 1; // @go_tags(`bson:"name" yaml:"name"`) FORM 1 support comment tail
+	// ...
+	// }
+	//
+
+	rCommentGoTagFunc = regexp.MustCompile(`(\s?)@go_tags\(` + "(`.*`)" + `\)\s`)
+)
+
 type textArea struct {
 	Start        int
 	End          int

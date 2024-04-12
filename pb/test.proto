@@ -6,6 +6,11 @@ option go_package = "/pb";
 import "google/protobuf/any.proto";
 import "google/protobuf/empty.proto";
 
+message V2GoTagExpr {
+  // @go_tags(`validate:"required"`)
+  int64 user_id = 1; // 用户id
+}
+
 message IP {
   string Address = 1; // @gotags: valid:"ip" yaml:"ip" json:"overrided"
 }

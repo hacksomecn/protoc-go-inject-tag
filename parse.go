@@ -6,10 +6,21 @@ import (
 )
 
 func tagFromComment(comment string) (tag string) {
+	// @go_tags: bson:"value"
 	match := rComment.FindStringSubmatch(comment)
 	if len(match) == 2 {
 		tag = match[1]
+		return
 	}
+
+	// @go_tags(`bson:"value"`)
+	matched := rComment.FindStringSubmatch(comment)
+	if len(matched) != 3 {
+		return
+	}
+
+	strTags := matched[2]
+	strTags = strings.Trim(strTags, "`")
 	return
 }
 

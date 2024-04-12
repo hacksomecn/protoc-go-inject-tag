@@ -22,7 +22,8 @@ var (
 	// support: Go tags regexp: `(\s?)@go_tags\(` + "(`.*`)" + `\)\s`
 	// message Example {
 	// ...
-	// string name = 1; // @go_tags(`bson:"name" yaml:"name"`) FORM 1 support comment tail
+	// @go_tags(`bson:"name" yaml:"name"`)
+	// string name = 1;
 	// ...
 	// }
 	//

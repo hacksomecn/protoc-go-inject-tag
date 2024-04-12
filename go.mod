@@ -1,4 +1,4 @@
-module github.com/hacksomecn/protoc-go-inject-tag
+module github.com/hacksomecn/protoc-go-inject-tag/v2
 
 go 1.18
 
